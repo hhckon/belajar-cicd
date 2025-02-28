@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Jalankan CI saat push ke main
+  pull_request:
+    branches:
+      - main  # Jalankan CI saat ada pull request ke main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest  # Menjalankan di environment Ubuntu
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v3  # Mengambil kode dari repo GitHub
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Menggunakan Node.js versi 18
+
+      - name: Install dependencies
+        run: npm install  # Menginstall dependensi aplikasi
+
+      - name: Run tests
+        run: npm test  # Menjalankan unit test
